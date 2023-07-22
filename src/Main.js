@@ -55,7 +55,6 @@ export const Main = () => {
                         "qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()[]{}?><,.`~-_=+";
 
                     const splitChars = allChars.split("");
-                    console.log(splitChars.length);
 
                     const copySplitChars = [...splitChars];
 
@@ -74,7 +73,6 @@ export const Main = () => {
                     );
                     const generatedPasswordAsString =
                         generatedPasswordAsArray.join("");
-                    console.log(generatedPasswordAsString);
                     setResult(generatedPasswordAsString);
                     setSuccessMessage(
                         "A custom random password has been generated with The requested number of characters. To Generate a different password with the same number of charcters please press 'Generate' again"
