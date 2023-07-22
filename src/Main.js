@@ -41,15 +41,14 @@ export const Main = () => {
 
     const generatePassword = () => {
         if (isNaN(Number(inputValue))) {
-            console.log(`current type msg is ${customMessageForType}`);
             setCustomMessageForType("Please Enter A Number");
-            console.log("please enter num");
-            console.log(customMessageForType);
+            textFieldRef.current.value = "";
         } else {
             if (inputValue > 61) {
                 setCustomMessageForLength(
                     "Please Enter a Length Smaller than 61"
                 );
+                textFieldRef.current.value = "";
             } else {
                 if (textFieldRef.current) {
                     const allChars =
