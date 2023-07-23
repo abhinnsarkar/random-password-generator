@@ -6,7 +6,8 @@ import KeyIcon from "@mui/icons-material/Key";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const Main = ({ isLaptop }) => {
+export const Main = () => {
+    const [isLaptop, setIsLaptop] = useState();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -23,26 +24,29 @@ export const Main = ({ isLaptop }) => {
 
         window.addEventListener("resize", handleOrientationChange);
 
+        if (window.innerWidth > 1000) {
+            console.log("device is laotop");
+            // isLaptop = true;
+            setIsLaptop(true);
+            console.log(isLaptop);
+        } else {
+            console.log("device is mobile");
+            setIsLaptop(false);
+            if (!isPortrait) {
+                handleOpen();
+            }
+        }
+
+        // if (!isLaptop && !isPortrait) {
+        //     console.log("laptop ", isLaptop);
+        //     console.log("portait ", isPortrait);
+        //     handleOpen();
+        // }
+
         return () => {
             window.removeEventListener("resize", handleOrientationChange);
         };
-    }, []);
-
-    useEffect(() => {
-        if (!isPortrait && !isLaptop) {
-            console.log("is landscape mobile");
-            handleOpen();
-        }
-        // if (isLaptop) {
-        //     console.log("is laptop");
-        // } else {
-        //     console.log("is mobile");
-        // }
-        // if (!isLaptop && !isPortrait) {
-        //     console.log("landscape in mobile");
-        //     handleOpen();
-        // }
-    });
+    }, [isLaptop, isPortrait]);
 
     const [inputValue, setInputValue] = useState();
     const [result, setResult] = useState("");
@@ -131,7 +135,8 @@ export const Main = ({ isLaptop }) => {
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
-                        width: 400,
+                        width: "75%",
+                        height: "75%",
                         bgcolor: "background.paper",
                         border: "2px solid #000",
                         borderRadius: 3,
@@ -162,7 +167,7 @@ export const Main = ({ isLaptop }) => {
                                 width: "100%",
                                 display: "flex",
                                 justifyContent: "center",
-                                paddingTop: "30%",
+                                // paddingTop: "30%",
                             }}
                         >
                             <Button onClick={handleClose}>
