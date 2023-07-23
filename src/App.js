@@ -1,4 +1,3 @@
-import "./App.css";
 import ScaledPage from "./ScaledPage";
 
 function App() {
