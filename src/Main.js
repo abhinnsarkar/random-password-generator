@@ -176,7 +176,7 @@ export const Main = ({ isLaptop }) => {
                                 margin: "0px",
                                 fontSize: "16px",
                                 backgroundColor: "white",
-                                width: "40%",
+                                width: isLaptop ? "40%" : "80%",
                                 height: "100%",
                             }}
                         />
@@ -186,7 +186,7 @@ export const Main = ({ isLaptop }) => {
                             variant="filled"
                             sx={{
                                 bgcolor: "#00AEFF",
-                                width: "40%",
+                                width: isLaptop ? "40%" : "80%",
                                 height: "100%",
                                 "&:hover": { backgroundColor: "#00AEFF" },
                                 // paddingTop: "50px",
@@ -204,11 +204,16 @@ export const Main = ({ isLaptop }) => {
                         </Button>
                     </Box>
 
-                    <Box></Box>
+                    {/* <Box
+                        sx={{
+                            bgcolor: "blue",
+                        }}
+                    ></Box> */}
                     <Box
                         sx={{
                             display: "flex",
                             alignItems: "row",
+                            // bgcolor: "red",
                         }}
                     >
                         <TextField
@@ -220,7 +225,7 @@ export const Main = ({ isLaptop }) => {
                             sx={{
                                 width: "95%",
                                 "& input": {
-                                    paddingLeft: "3vw", // Add the desired offset (adjust as needed)
+                                    paddingLeft: "4vw", // Add the desired offset (adjust as needed)
                                 },
                             }}
                             inputProps={
