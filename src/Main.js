@@ -194,8 +194,8 @@ export const Main = ({ isLaptop }) => {
                 sx={{
                     width: "100%",
                     height: "100vh",
-                    // backgroundColor: "black",
-                    backgroundColor: "red",
+                    backgroundColor: "black",
+                    // backgroundColor: "red",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
