@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import KeyIcon from "@mui/icons-material/Key";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-export const Main = () => {
+export const Main = ({ isLaptop }) => {
     const [inputValue, setInputValue] = useState();
     const [result, setResult] = useState("");
 
@@ -118,8 +118,8 @@ export const Main = () => {
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-evenly",
-                        width: "50%",
-                        height: "40%",
+                        width: isLaptop ? "60%" : "100%",
+                        height: isLaptop ? "40%" : "100%",
                         bgcolor: "grey",
                         borderRadius: 3,
                         boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
@@ -127,16 +127,17 @@ export const Main = () => {
                     }}
                 >
                     <Box
+                        className="TitleBox"
                         sx={{
                             // alignItems: "center",
                             // alignContent: "center",
                             justifyContent: "center",
                             display: "flex",
-                            // flexDirection: "row",
+                            flexDirection: "row",
                             // bgcolor: "red",
                         }}
                     >
-                        <Typography variant="h3">
+                        <Typography variant="h3" className="Title">
                             Password Generator{" "}
                             <KeyIcon
                                 sx={{ fontSize: 100 }}
@@ -146,16 +147,26 @@ export const Main = () => {
                     </Box>
 
                     <Box
+                        className="Controls"
+                        // spacing={2}
                         sx={{
                             display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-evenly",
+                            // flexDirection: "row",
+
+                            flexDirection: isLaptop ? "row" : "column",
+                            justifyContent: isLaptop ? "space-evenly" : "",
+                            alignItems: !isLaptop ? "center" : "",
+                            // alignItems: "center",
                             width: "100%",
                             height: "20%",
                             // bgcolor: "green",
+                            // paddingTop: "50px",
+                            // marginTop: "50px",
+                            // marginBottom: "50px",
                         }}
                     >
                         <TextField
+                            className="charInput"
                             value={inputValue}
                             onChange={handleInputChange}
                             placeholder="How Many Characters?"
@@ -171,12 +182,16 @@ export const Main = () => {
                         />
 
                         <Button
+                            className="generateBtn"
                             variant="filled"
                             sx={{
                                 bgcolor: "#00AEFF",
                                 width: "40%",
                                 height: "100%",
                                 "&:hover": { backgroundColor: "#00AEFF" },
+                                // paddingTop: "50px",
+                                marginTop: isLaptop ? "0px" : "20px",
+                                // marginBottom: "50px",
                             }}
                             onClick={generatePassword}
                         >

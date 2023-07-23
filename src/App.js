@@ -1,8 +1,8 @@
 import "./App.css";
-import { Main } from "./Main";
+import ScaledPage from "./ScaledPage";
 
 function App() {
-    return <Main />;
+    return <ScaledPage />;
 }
 
 export default App;
