@@ -1,11 +1,49 @@
-import { Box, Button, CssBaseline, TextField } from "@mui/material";
+import { Box, Button, CssBaseline, Modal, TextField } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import { Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import KeyIcon from "@mui/icons-material/Key";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const Main = ({ isLaptop }) => {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [isPortrait, setIsPortrait] = useState(
+        window.innerHeight > window.innerWidth
+    );
+
+    useEffect(() => {
+        const handleOrientationChange = () => {
+            // console.log("height > width therefore portrait mobile");
+            setIsPortrait(window.innerHeight > window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleOrientationChange);
+
+        return () => {
+            window.removeEventListener("resize", handleOrientationChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isPortrait && !isLaptop) {
+            console.log("is landscape mobile");
+            handleOpen();
+        }
+        // if (isLaptop) {
+        //     console.log("is laptop");
+        // } else {
+        //     console.log("is mobile");
+        // }
+        // if (!isLaptop && !isPortrait) {
+        //     console.log("landscape in mobile");
+        //     handleOpen();
+        // }
+    });
+
     const [inputValue, setInputValue] = useState();
     const [result, setResult] = useState("");
 
@@ -86,6 +124,56 @@ export const Main = ({ isLaptop }) => {
 
     return (
         <>
+            {
+                <Modal
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: 400,
+                        bgcolor: "background.paper",
+                        border: "2px solid #000",
+                        borderRadius: 3,
+                        boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
+                        // boxShadow: 24,
+                        p: 4,
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box>
+                        <Typography
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                        >
+                            Usability Error
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            Please turn your device to Portrait Mode for the
+                            best usage
+                        </Typography>
+
+                        <Box
+                            sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "center",
+                                paddingTop: "30%",
+                            }}
+                        >
+                            <Button onClick={handleClose}>
+                                <CloseIcon
+                                    sx={{ fontSize: 100, color: "black" }}
+                                />
+                            </Button>
+                        </Box>
+                    </Box>
+                </Modal>
+            }
             {customMessageForType && (
                 <Alert severity="error" onClose={handleTypeAlertClose}>
                     {customMessageForType}
@@ -106,7 +194,8 @@ export const Main = ({ isLaptop }) => {
                 sx={{
                     width: "100%",
                     height: "100vh",
-                    backgroundColor: "black",
+                    // backgroundColor: "black",
+                    backgroundColor: "red",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -246,6 +335,7 @@ export const Main = ({ isLaptop }) => {
                     </Box>
                 </Box>
             </Box>
+            {/* <Button onClick={handleOpen}>Test</Button> */}
         </>
     );
 };
